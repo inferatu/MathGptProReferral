@@ -24,10 +24,11 @@ def create_mail(link, show_process=False):
     else:
         driver = webdriver.Chrome()
     driver.get(link)
-    wait(10)
+    wait(5)
+    driver.find_element(By.CSS_SELECTOR, value=".css-splr7f").click()
     driver.find_element(By.ID, value="input-email").send_keys(tm.email)
     driver.find_element(By.CSS_SELECTOR, value=".MuiButton-contained").click()
-    wait(10)
+    wait(5)
     driver.quit()
 
     try:
