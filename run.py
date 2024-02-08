@@ -6,6 +6,7 @@ SETTINGS_FILE = 'settings.json'
 
 
 def create_settings_file():
+    # TODO: move that function to other file
     referral_link = input("Ссылка на ваш реферальный код: ")
 
     show_process = None
@@ -23,10 +24,11 @@ def create_settings_file():
         with open(SETTINGS_FILE, 'w', encoding='utf8') as f:
             json.dump(settings, f)
     except Exception as e:
-        print(f'Че та возникла ошибка при создании файла: {e}')
+        print(f'Возникла ошибка при создании файла: {e}')
 
 
 def load_settings():
+    # TODO: move that function to other file
     if not os.path.exists(SETTINGS_FILE):
         print("Файл настроек не найден. Давайте его создадим.")
         create_settings_file()
@@ -62,5 +64,7 @@ if settings is not None:
                             show_process=settings['show_process'])
 
     referral.start_registration()
+    print("Программа закроется, когда все будет готово")
+
 else:
     print("Не могу получить доступ к настройкам. Убедись что у меня есть права")
