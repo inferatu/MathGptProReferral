@@ -6,23 +6,20 @@ import simpleaudio as sa
 from create_mail import create_mail
 
 # app = Flask(__name__)
-my_mail = None
 
 
-def play_sound(file_name):
-    wave_obj = sa.WaveObject.from_wave_file(file_name)
-    play_obj = wave_obj.play()
-    play_obj.wait_done()
+# def play_sound(file_name):
+#     wave_obj = sa.WaveObject.from_wave_file(file_name)
+#     play_obj = wave_obj.play()
+#     play_obj.wait_done()
 
 
 # функция для потока (Я В ПОТОКЕ 😈😈😈😈)
 def create_and_register():
-    global my_mail
-    regestration_link = 'https://mathgptpro.com/new'
-    my_mail = create_mail(regestration_link, show_process=True)
+    regestration_link = 'https://mathgptpro.com?inv=PPV4KJ'
+    create_mail(regestration_link, show_process=True)
     # open('http://127.0.0.1:5000')
     print('Выдал почту')
-    play_sound('pop.wav')
     print('Вы можете закрыть программу. OwO❤')
 
 
