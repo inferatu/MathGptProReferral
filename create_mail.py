@@ -10,16 +10,16 @@ from register_user import process_verification_link
 def create_mail(link, show_process=False):
     tm = TempMail()
 
-    # Вывести на экран текущую почту
+    # Prints email on screen
     print(f'Email: {tm.email}')
 
     printed_mails = []
-    opened_link = False  # обязательно чтобы не переходить по ссылке мильон раз
+    opened_link = False  # will change to true so won't be caught in a loop
     if not show_process:
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
 
-        options.add_argument('--disable-dev-shm-usage')  # чтобы памяти много не жрало
+        options.add_argument('--disable-dev-shm-usage')  # wont take much CPU
         driver = webdriver.Chrome(options=options)
     else:
         driver = webdriver.Chrome()
@@ -41,20 +41,20 @@ def create_mail(link, show_process=False):
                     print(f'Body: {mail.text}')
                     print('\n-  -  -  -  -  END  -  -  -  -  -\n')
 
-                    # проверка на ссылку
+                    # finding links
                     url_pattern = r'\[https://mathgptpro\.com/login/verification/\S+\]'
                     urls = re.findall(url_pattern, mail.text)
 
-                    # убираем [] чтобы нормальная ссылка была
+                    # removing [] from list
                     cleaned_urls = [url.strip('[]') for url in urls]
 
                     if cleaned_urls and not opened_link:
-                        # [0] для первой ссылки в почте
+                        # [0] for first link
                         if not show_process:
                             process_verification_link(cleaned_urls[0], show_process=False)
                         else:
                             process_verification_link(cleaned_urls[0], show_process=True)
-                        # opened_link = True  # ставим правду
+                        # opened_link = True  # need to remove too
                         break
                 break
             # wait(5)
