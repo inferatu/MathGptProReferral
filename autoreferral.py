@@ -4,9 +4,9 @@ from create_mail import create_mail
 
 class AutoReferral:
     def __init__(self, referral_link: str, number_of_registrations: int = 1, show_process: bool = False):
-        self.referral_link = referral_link
-        self.number_of_registrations = number_of_registrations
-        self.show_process = show_process
+        self.referral_link = str(referral_link)
+        self.number_of_registrations = int(number_of_registrations)
+        self.show_process = bool(show_process)
 
     def create_and_register(self, referral_link, show_process):
         create_mail(referral_link, show_process=show_process)
