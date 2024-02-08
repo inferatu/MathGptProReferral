@@ -5,14 +5,14 @@ from autoreferral import AutoReferral
 SETTINGS_FILE = 'settings.json'
 
 
-
-
 def create_settings_file():
     referral_link = input("Ссылка на ваш реферальный код: ")
 
-
-
-    show_process = input("Показывать процесс? y/n: ").lower()
+    show_process = None
+    while show_process not in ['y', 'n']:
+        show_process = input("Показывать процесс? y/n: ").lower()
+        if show_process not in ['y', 'n']:
+            print("Нужно ввести y или n")
 
     settings = {
         "referral_link": referral_link,
@@ -45,16 +45,22 @@ settings = load_settings()
 while True:
     try:
         number_of_registrations = int(input("Сколько добавить монеток? (1 аккаунт = 5 монеток): "))
+        if number_of_registrations > 10:
+            if input("Количество аккаунтов больше 10 может работать некорректно. Хотите продолжить? y/n: ") == 'y':
+                pass
+            else:
+                print(f'Регестрирую 10 аккаунтов вместо: {number_of_registrations}')
+
+                number_of_registrations = 1
         break
     except ValueError:
         print("Нужно число, не слова")
 
-
 if settings is not None:
-    referal = AutoReferral(referral_link=settings['referral_link'],
-                           number_of_registrations=number_of_registrations,
-                           show_process=settings['show_process'])
+    referral = AutoReferral(referral_link=settings['referral_link'],
+                            number_of_registrations=number_of_registrations,
+                            show_process=settings['show_process'])
 
-    referal.start_registration()
+    referral.start_registration()
 else:
     print("Не могу получить доступ к настройкам. Убедись что у меня есть права")
