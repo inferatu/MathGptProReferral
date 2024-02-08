@@ -9,7 +9,7 @@ def process_verification_link(link: str, show_process=False):
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
 
-        options.add_argument('--disable-dev-shm-usage') # чтобы памяти много не жрало
+        options.add_argument('--disable-dev-shm-usage')  # so it won't take a lot of CPU
         driver = webdriver.Chrome(options=options)
     else:
         driver = webdriver.Chrome()

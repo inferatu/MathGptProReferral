@@ -7,13 +7,13 @@ SETTINGS_FILE = 'settings.json'
 
 def create_settings_file():
     # TODO: move that function to other file
-    referral_link = input("Ссылка на ваш реферальный код: ")
+    referral_link = input("Your referral link: ")
 
     show_process = None
     while show_process not in ['y', 'n']:
-        show_process = input("Показывать процесс? y/n: ").lower()
+        show_process = input("Show process? y/n: ").lower()
         if show_process not in ['y', 'n']:
-            print("Нужно ввести y или n")
+            print("You must enter either 'y' or 'n'.")
 
     settings = {
         "referral_link": referral_link,
@@ -24,13 +24,13 @@ def create_settings_file():
         with open(SETTINGS_FILE, 'w', encoding='utf8') as f:
             json.dump(settings, f)
     except Exception as e:
-        print(f'Возникла ошибка при создании файла: {e}')
+        print(f'This error appeared when creating file: {e}')
 
 
 def load_settings():
     # TODO: move that function to other file
     if not os.path.exists(SETTINGS_FILE):
-        print("Файл настроек не найден. Давайте его создадим.")
+        print("Options file does not exist, let's create it.")
         create_settings_file()
 
     try:
@@ -38,7 +38,7 @@ def load_settings():
             settings = json.load(f)
         return settings
     except Exception as e:
-        print(f"Ошибка при загрузке настроек: {e}")
+        print(f"This error appeared while loading file: {e}")
         return None
 
 
@@ -46,17 +46,17 @@ settings = load_settings()
 
 while True:
     try:
-        number_of_registrations = int(input("Сколько добавить монеток? (1 аккаунт = 5 монеток): "))
+        number_of_registrations = int(input("How much coins you need (1 account = 5 coins)?: "))
         if number_of_registrations > 10:
-            if input("Количество аккаунтов больше 10 может работать некорректно. Хотите продолжить? y/n: ") == 'y':
+            if input("Using more than 10 accounts may create some errors, proceed? y/n: ") == 'y':
                 pass
             else:
-                print(f'Регестрирую 10 аккаунтов вместо: {number_of_registrations}')
+                print(f'Registering 10 accounts, not: {number_of_registrations}')
 
                 number_of_registrations = 1
         break
     except ValueError:
-        print("Нужно число, не слова")
+        print("You must enter a number, not a string.")
 
 if settings is not None:
     referral = AutoReferral(referral_link=settings['referral_link'],
@@ -64,7 +64,7 @@ if settings is not None:
                             show_process=settings['show_process'])
 
     referral.start_registration()
-    print("Программа закроется, когда все будет готово")
+    print("Program will close when everything is done.")
 
 else:
-    print("Не могу получить доступ к настройкам. Убедись что у меня есть права")
+    print("Can't access options file. Are you sure I have all rights?")
