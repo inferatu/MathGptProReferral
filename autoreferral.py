@@ -19,7 +19,4 @@ class AutoReferral:
             t.start()
 
 
-if __name__ == "__main__":
-    auto_referral = AutoReferral(referral_link="https://mathgptpro.com?inv=PPV4KJ", number_of_registrations=5,
-                                 show_process=True)
-    auto_referral.start_registration()
+
