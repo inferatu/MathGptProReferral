@@ -45,7 +45,7 @@ def create_mail(link, show_process=False):
                     url_pattern = r'\[https://mathgptpro\.com/login/verification/\S+\]'
                     urls = re.findall(url_pattern, mail.text)
 
-                    # removing [] from list
+                    # removing [] from a list
                     cleaned_urls = [url.strip('[]') for url in urls]
 
                     if cleaned_urls and not opened_link:
