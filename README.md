@@ -1,7 +1,7 @@
 # MathGptReferral: Automate Your Referrals
 
 This repository contains the code for an application that automates the process of getting referrals for your account.
-
+Link for site: https://mathgptpro.com/
 ## Usage
 
 There are two ways to use this application:
